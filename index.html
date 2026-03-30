@@ -1,155 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SDP 2.0 Certificate Verification</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDP 2.0 Certificate Verification</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #333;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #333;
+}
 
-    .container {
-      max-width: 600px;
-      margin: 60px auto;
-      background: #fff;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      text-align: center;
-    }
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  text-align: center;
+}
 
-    .title {
-      font-size: 22px;
-      font-weight: bold;
-      color: #1e3c72;
-    }
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1e3c72;
+}
 
-    .subtitle {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 20px;
-    }
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
 
-    .org {
-      font-size: 13px;
-      margin-bottom: 20px;
-      color: #444;
-    }
+.org {
+  font-size: 13px;
+  margin-bottom: 20px;
+  color: #444;
+}
 
-    input {
-      width: 85%;
-      padding: 12px;
-      margin: 15px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
+input {
+  width: 85%;
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
-    button {
-      padding: 12px 25px;
-      background: #1e3c72;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-      transition: 0.3s;
-    }
+button {
+  padding: 12px 25px;
+  background: #1e3c72;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-    button:hover {
-      background: #16325c;
-    }
+.result-box {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  display: none;
+}
 
-    .result-box {
-      margin-top: 25px;
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-    }
+.valid {
+  background: #e6f9ec;
+  color: #1e7e34;
+  border: 1px solid #28a745;
+}
 
-    .valid {
-      background: #e6f9ec;
-      color: #1e7e34;
-      border: 1px solid #28a745;
-    }
-
-    .invalid {
-      background: #fdecea;
-      color: #c82333;
-      border: 1px solid #dc3545;
-    }
-
-    .footer {
-      margin-top: 25px;
-      font-size: 12px;
-      color: #888;
-    }
-  </style>
+.invalid {
+  background: #fdecea;
+  color: #c82333;
+  border: 1px solid #dc3545;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <div class="title">🎓 STUDENT DEVELOPMENT PROGRAMME 2.0</div>
-  <div class="subtitle">Building Research Competence</div>
+<div class="title">🎓 STUDENT DEVELOPMENT PROGRAMME 2.0</div>
+<div class="subtitle">Building Research Competence</div>
 
-  <div class="org">
-    Organized by<br>
-    Lloyd Group of Institutions<br>
-    UG Management Department<br>
-    ThinkLab - Research Cell
-  </div>
+<div class="org">
+Lloyd Group of Institutions<br>
+UG Management Department<br>
+ThinkLab - Research Cell
+</div>
 
-  <hr>
+<hr>
 
-  <h3>🔍 Certificate Verification</h3>
+<h3>🔍 Certificate Verification</h3>
 
-  <input type="text" id="certID" placeholder="Enter Certificate ID">
-  <br>
-  <button onclick="verify()">Verify Certificate</button>
+<input type="text" id="certID" placeholder="Enter Certificate ID">
+<br>
+<button onclick="verify()">Verify Certificate</button>
 
-  <div id="resultBox" class="result-box"></div>
-
-  <div class="footer">
-    Scan QR Code or enter Certificate ID to verify authenticity
-  </div>
+<div id="resultBox" class="result-box"></div>
 
 </div>
 
 <script>
-<script>
+
 const data = {
-  "SDP-2026-001": {
-    name: "Shivam Dagur",
-    event: "SDP 2.0 - Building Research Competence",
-    date: "6 April 2026"
-  },
-  "SDP-2026-002": {
-    name: "Rahul Kumar",
-    event: "SDP 2.0 - Building Research Competence",
-    date: "6 April 2026"
-  },
-  "SDP-2026-003": {
-    name: "Amit Sharma",
-    event: "SDP 2.0 - Building Research Competence",
-    date: "6 April 2026"
-  }
+  "SDP-2026-001": {name:"Shivam Dagur", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-002": {name:"Rahul Kumar", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-003": {name:"Amit Sharma", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-004": {name:"Priya Singh", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-005": {name:"Neha Verma", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-006": {name:"Rohit Yadav", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-007": {name:"Anjali Gupta", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-008": {name:"Vikas Mehta", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-009": {name:"Sneha Kapoor", event:"SDP 2.0", date:"6 April 2026"},
+  "SDP-2026-010": {name:"Arjun Patel", event:"SDP 2.0", date:"6 April 2026"}
 };
 
 function verify() {
   let id = document.getElementById("certID").value.trim();
   showResult(id);
-}
-
-function getParam() {
-  let url = new URLSearchParams(window.location.search);
-  return url.get("cert");
 }
 
 function showResult(id) {
@@ -170,9 +142,15 @@ function showResult(id) {
   }
 }
 
-// Auto verify via QR
-let id = getParam();
-if (id) {
-  showResult(id);
+// QR Auto verification
+let params = new URLSearchParams(window.location.search);
+let certID = params.get("cert");
+
+if(certID){
+  showResult(certID);
 }
+
 </script>
+
+</body>
+</html>
